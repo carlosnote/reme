@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>キャリア迷子診断 | RE:ME</title>
+<meta name="description" content="たった7つの質問で、あなたのキャリアの迷いの本当の原因がわかる。方向性模索・自信喪失・環境不一致・現状維持、あなたはどのタイプ？">
+<meta property="og:title" content="キャリア迷子診断 | RE:ME">
+<meta property="og:description" content="たった7つの質問で、キャリアの迷いの本当の原因がわかる無料診断テスト">
+<meta property="og:type" content="website">
+<meta property="og:image" content="ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="キャリア迷子診断 | RE:ME">
+<meta name="twitter:description" content="たった7つの質問で、キャリアの迷いの本当の原因がわかる無料診断テスト">
+<meta name="twitter:image" content="ogp.png">
+<link rel="canonical" href="">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0c14;
+  --surface: #14141f;
+  --card: #1a1a2e;
+  --border: rgba(255,255,255,0.06);
+  --text: #e8e6f0;
+  --text-dim: #8a87a0;
+  --accent-1: #f0c27a;
+  --accent-2: #fc5c7d;
+  --accent-3: #6a82fb;
+  --accent-4: #45e0a0;
+  --gradient-warm: linear-gradient(135deg, #f0c27a 0%, #fc5c7d 100%);
+  --gradient-cool: linear-gradient(135deg, #6a82fb 0%, #45e0a0 100%);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(106,130,251,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(252,92,125,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(240,194,122,0.05) 0%, transparent 50%);
+  animation: ambientDrift 20s ease-in-out infinite alternate;
+  z-index: 0;
+  pointer-events: none;
+}
+@keyframes ambientDrift {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-3%, 2%) rotate(3deg); }
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 20px 20px 60px;
+}
+.hero {
+  text-align: center;
+  padding: 60px 0 40px;
+  animation: fadeUp 0.8s ease-out;
+}
+.hero-badge {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-1);
+  border: 1px solid rgba(240,194,122,0.3);
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+}
+.hero h1 {
+  font-size: clamp(28px, 7vw, 42px);
+  font-weight: 900;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  background: var(--gradient-warm);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero h1 span {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(14px, 3.5vw, 18px);
+  font-weight: 700;
+  font-style: italic;
+  background: var(--gradient-cool);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
+.hero p {
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 440px;
+  margin: 20px auto 0;
+}
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 28px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.hero-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hero-meta .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent-3);
+}
+.progress-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(12,12,20,0.85);
+  backdrop-filter: blur(20px);
+  padding: 16px 0 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.progress-bar {
+  height: 3px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--gradient-warm);
+  border-radius: 10px;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 0%;
+}
+.question-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 36px 28px;
+  animation: fadeUp 0.5s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+.question-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gradient-warm);
+  opacity: 0.6;
+}
+.q-number {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--accent-1);
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+.q-text {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.option {
+  position: relative;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.option:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.12);
+  transform: translateX(4px);
+}
+.option.selected {
+  background: rgba(106,130,251,0.1);
+  border-color: rgba(106,130,251,0.4);
+}
+.option-marker {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-dim);
+  transition: all 0.3s;
+  margin-top: 1px;
+}
+.option.selected .option-marker {
+  background: var(--accent-3);
+  border-color: var(--accent-3);
+  color: #fff;
+}
+.nav-buttons {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 24px;
+}
+.btn {
+  padding: 14px 32px;
+  border-radius: 12px;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-back {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+.btn-back:hover { background: rgba(255,255,255,0.04); }
+.btn-start {
+  background: var(--gradient-warm);
+  color: #0c0c14;
+  padding: 18px 48px;
+  font-size: 16px;
+  border-radius: 14px;
+  margin-top: 36px;
+  border: none;
+  font-family: inherit;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.3s;
+  letter-spacing: 1px;
+}
+.btn-start:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(240,194,122,0.25); }
+.result-section { animation: fadeUp 0.7s ease-out; }
+.result-type-card {
+  text-align: center;
+  padding: 48px 28px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.result-type-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.result-type-card.type-direction::before { background: linear-gradient(90deg, #f0c27a, #fc5c7d); }
+.result-type-card.type-confidence::before { background: linear-gradient(90deg, #6a82fb, #b06bff); }
+.result-type-card.type-environment::before { background: linear-gradient(90deg, #fc5c7d, #ff8a5c); }
+.result-type-card.type-status-quo::before { background: linear-gradient(90deg, #45e0a0, #6a82fb); }
+.result-icon { font-size: 56px; margin-bottom: 20px; display: block; }
+.result-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; }
+.result-title { font-size: clamp(22px, 5vw, 30px); font-weight: 900; margin-bottom: 8px; }
+.result-subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 24px; }
+.result-description { font-size: 15px; line-height: 1.9; color: var(--text); text-align: left; max-width: 520px; margin: 0 auto; }
+.advice-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  margin-bottom: 20px;
+  animation: fadeUp 0.7s ease-out 0.15s both;
+}
+.advice-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.advice-card h3 .icon { font-size: 18px; }
+.advice-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.advice-list li { font-size: 14px; line-height: 1.8; color: var(--text); padding-left: 20px; position: relative; }
+.advice-list li::before { content: '\2192'; position: absolute; left: 0; color: var(--accent-1); font-weight: 700; }
+.reme-card {
+  background: linear-gradient(135deg, rgba(106,130,251,0.12) 0%, rgba(69,224,160,0.08) 100%);
+  border: 1px solid rgba(106,130,251,0.2);
+  border-radius: 20px;
+  padding: 36px 28px;
+  text-align: center;
+  animation: fadeUp 0.7s ease-out 0.3s both;
+}
+.reme-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-style: italic;
+  margin-bottom: 8px;
+  background: var(--gradient-cool);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.reme-card .tagline { font-size: 12px; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 20px; }
+.reme-card p { font-size: 14.5px; line-height: 1.9; color: var(--text); margin-bottom: 16px; }
+.reme-features { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.reme-feature { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 16px 14px; font-size: 12.5px; color: var(--text); line-height: 1.6; }
+.reme-feature .feat-icon { font-size: 20px; display: block; margin-bottom: 8px; }
+.btn-cta {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 16px 48px;
+  background: var(--gradient-cool);
+  color: #0c0c14;
+  border: none;
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.3s;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+.btn-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(106,130,251,0.25); }
+.btn-retry {
+  display: block;
+  margin: 24px auto 0;
+  padding: 14px 32px;
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-retry:hover { background: rgba(255,255,255,0.04); }
+.score-bars { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; padding: 24px; background: rgba(255,255,255,0.02); border-radius: 16px; }
+.score-row { display: flex; align-items: center; gap: 12px; font-size: 12px; }
+.score-label { width: 100px; flex-shrink: 0; color: var(--text-dim); text-align: right; }
+.score-track { flex: 1; height: 6px; background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden; }
+.score-fill { height: 100%; border-radius: 10px; transition: width 1s cubic-bezier(0.22, 1, 0.36, 1); width: 0; }
+.score-fill.dir { background: linear-gradient(90deg, #f0c27a, #fc5c7d); }
+.score-fill.conf { background: linear-gradient(90deg, #6a82fb, #b06bff); }
+.score-fill.env { background: linear-gradient(90deg, #fc5c7d, #ff8a5c); }
+.score-fill.stat { background: linear-gradient(90deg, #45e0a0, #6a82fb); }
+.score-val { width: 32px; text-align: right; font-weight: 700; font-size: 12px; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hidden { display: none !important; }
+@media (max-width: 480px) {
+  .container { padding: 16px 16px 40px; }
+  .question-card { padding: 28px 20px; }
+  .reme-features { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <section class="hero" id="heroSection">
+    <div class="hero-badge">CAREER DIAGNOSIS</div>
+    <h1>キャリア迷子診断<span>— Find your way back to yourself —</span></h1>
+    <p>たった7つの質問に答えるだけで、あなたのキャリアの迷いの「本当の原因」がわかります。</p>
+    <div class="hero-meta">
+      <span><div class="dot"></div>所要時間 約2分</span>
+      <span><div class="dot" style="background:var(--accent-2)"></div>全7問</span>
+      <span><div class="dot" style="background:var(--accent-4)"></div>4タイプ診断</span>
+    </div>
+    <button class="btn-start" id="startBtn">診断をはじめる</button>
+  </section>
+
+  <div class="progress-wrap hidden" id="progressWrap">
+    <div class="progress-info">
+      <span id="progressLabel">Q1 / 7</span>
+      <span id="progressPercent">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <div id="quizArea" class="hidden"></div>
+  <div id="resultArea" class="hidden"></div>
+</div>
+
+<script>
+(function() {
+  var questions = [
+    {
+      text: "いまのキャリアについて、一番しっくりくる気持ちは？",
+      options: [
+        { text: "やりたいことが多すぎて絞れない", scores: [3,0,0,0] },
+        { text: "自分にできることなんてないと思う", scores: [0,3,0,0] },
+        { text: "能力はあるのに活かせていない気がする", scores: [0,0,3,0] },
+        { text: "不満はないけど、このままでいいのか不安", scores: [0,0,0,3] }
+      ]
+    },
+    {
+      text: "転職サイトを見ているとき、どう感じる？",
+      options: [
+        { text: "興味ある仕事が多すぎて迷ってしまう", scores: [3,0,0,1] },
+        { text: "「自分には無理だろうな」と感じる", scores: [0,3,0,0] },
+        { text: "今の会社より良い環境がありそうだと思う", scores: [0,0,3,0] },
+        { text: "見るだけで、実際に応募する気にはならない", scores: [0,0,0,3] }
+      ]
+    },
+    {
+      text: "友人の転職成功を聞いたとき、最初に浮かぶ感情は？",
+      options: [
+        { text: "「自分も何か新しいこと始めたい！」", scores: [3,0,0,0] },
+        { text: "「あの人だからできたんだ…自分には…」", scores: [0,3,0,0] },
+        { text: "「うらやましい、自分も環境を変えたい」", scores: [0,0,3,0] },
+        { text: "「すごいな」と思うが、自分は動かない", scores: [0,0,0,3] }
+      ]
+    },
+    {
+      text: "日曜の夜、月曜を前にして感じるのは？",
+      options: [
+        { text: "「本当にやりたい仕事って何だろう」と考える", scores: [3,0,1,0] },
+        { text: "「また失敗したらどうしよう」と不安になる", scores: [0,3,0,0] },
+        { text: "「なんでこの仕事してるんだろう」と虚しくなる", scores: [0,0,3,0] },
+        { text: "特に何も感じない。淡々としている", scores: [0,0,0,3] }
+      ]
+    },
+    {
+      text: "キャリアに関する本や記事を読んだ後の行動は？",
+      options: [
+        { text: "新しい資格やスキルをリサーチし始める", scores: [3,0,0,0] },
+        { text: "やる気が出るけど、すぐ「自分には…」となる", scores: [1,3,0,0] },
+        { text: "「やっぱり今の職場が問題だ」と確信する", scores: [0,0,3,0] },
+        { text: "参考になったなと思うが、何もしない", scores: [0,0,0,3] }
+      ]
+    },
+    {
+      text: "あなたのキャリアの「停滞感」の正体に近いのは？",
+      options: [
+        { text: "選択肢が多すぎて決められない焦り", scores: [3,0,0,1] },
+        { text: "過去の失敗やコンプレックスへの囚われ", scores: [0,3,0,0] },
+        { text: "自分の価値が正しく評価されていない不満", scores: [0,0,3,0] },
+        { text: "漠然とした「このままでいいのか」感", scores: [0,0,0,3] }
+      ]
+    },
+    {
+      text: "もし何の制約もなかったら、明日から何をする？",
+      options: [
+        { text: "気になっていたこと全部試してみたい！", scores: [3,0,0,0] },
+        { text: "制約がなくても、自分に何ができるかわからない", scores: [0,3,0,0] },
+        { text: "今の仕事を辞めて新しい場所で再スタートする", scores: [0,0,3,0] },
+        { text: "正直、何をしたいか自体がわからない", scores: [1,0,0,3] }
+      ]
+    }
+  ];
+
+  var results = {
+    direction: {
+      icon: "🧭",
+      type: "direction",
+      label: "TYPE A",
+      title: "方向性模索タイプ",
+      subtitle: "— やりたいことが多すぎる迷子 —",
+      description: "あなたは好奇心が旺盛で、興味の幅が広い人。しかしその「可能性の多さ」がかえって足を止めてしまう原因に。やりたいことを「絞る」のではなく、まず一つ「試す」ことが突破口になります。",
+      advice: [
+        "興味リストを作り、上位3つに絞って1週間ずつ深掘りしてみる",
+        "「完璧な選択」を求めず、70点で動き出すクセをつける",
+        "実際にやっている人に会って話を聞く（情報収集ではなく体温を感じる）"
+      ],
+      reme: "RE:MEのコーチングでは、あなたの「多すぎる興味」を棚卸しし、価値観・強み・ライフステージから優先順位を一緒に明確にします。「考えすぎて動けない」から「戦略的に選んで動ける」あなたへ。"
+    },
+    confidence: {
+      icon: "🪞",
+      type: "confidence",
+      label: "TYPE B",
+      title: "自信喪失タイプ",
+      subtitle: "— 本当は力があるのに気づけない —",
+      description: "あなたには実力やポテンシャルがあるのに、過去の経験や周囲との比較が、自分自身を過小評価させています。「自分なんて」という言葉がクセになっていませんか？",
+      advice: [
+        "過去に感謝されたこと、褒められたことを10個書き出してみる",
+        "他人との比較をやめ、「半年前の自分」と比べる習慣を持つ",
+        "小さな成功体験を意図的に積み上げる（まずは達成可能な目標から）"
+      ],
+      reme: "RE:MEでは、あなた自身が気づいていない「隠れた強み」を第三者の視点で引き出します。過去の経験を「失敗」ではなく「資産」として再定義するプロセスを通じて、本来の自信を取り戻しましょう。"
+    },
+    environment: {
+      icon: "🔄",
+      type: "environment",
+      label: "TYPE C",
+      title: "環境不一致タイプ",
+      subtitle: "— 場所を変えれば輝ける人 —",
+      description: "あなたの能力や意欲は十分。ただ、今の環境がそれを活かせる場所ではない可能性が高いです。魚が陸で苦しむように、環境とのミスマッチがストレスの根本原因かもしれません。",
+      advice: [
+        "今の環境で「何が合わないか」を具体的に言語化する",
+        "理想の働き方の条件を、待遇面・人間関係・仕事内容で整理する",
+        "社外の人と交流し、自分の市場価値を客観的に把握する"
+      ],
+      reme: "RE:MEのコーチングでは、あなたの強みが最大限活きる環境の条件を一緒に特定し、戦略的な転職・異動計画を設計します。「なんとなく合わない」を「ここなら輝ける」に変えましょう。"
+    },
+    statusQuo: {
+      icon: "⏸️",
+      type: "status-quo",
+      label: "TYPE D",
+      title: "現状維持タイプ",
+      subtitle: "— 安定の中で静かに燻っている —",
+      description: "大きな不満はない。でも「このままでいいのか」という声が、心のどこかでずっと鳴り続けていませんか？今の安定を手放す怖さが、あなたの可能性にフタをしています。",
+      advice: [
+        "「5年後、今と同じ毎日を送っている自分」を想像してみる",
+        "小さな変化から始める（通勤ルートを変える、新しい人に会うなど）",
+        "「動かないリスク」も立派なリスクだと認識する"
+      ],
+      reme: "RE:MEでは、あなたの中に眠っている「本当はこうしたい」を丁寧に掘り起こします。安定を捨てるのではなく、安定を土台にしながら次のステージへ踏み出す設計をサポートします。"
+    }
+  };
+
+  var currentQ = 0;
+  var answers = [];
+  var totalQ = questions.length;
+  var markers = ['A', 'B', 'C', 'D'];
+  var typeNames = ['方向性模索', '自信喪失', '環境不一致', '現状維持'];
+  var fillClasses = ['dir', 'conf', 'env', 'stat'];
+  var typeKeys = ['direction', 'confidence', 'environment', 'statusQuo'];
+
+  document.getElementById('startBtn').addEventListener('click', startQuiz);
+
+  function startQuiz() {
+    document.getElementById('heroSection').classList.add('hidden');
+    document.getElementById('progressWrap').classList.remove('hidden');
+    document.getElementById('quizArea').classList.remove('hidden');
+    document.getElementById('resultArea').classList.add('hidden');
+    document.getElementById('resultArea').innerHTML = '';
+    answers = [];
+    currentQ = 0;
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    var q = questions[currentQ];
+    var pct = Math.round((currentQ / totalQ) * 100);
+    document.getElementById('progressLabel').textContent = 'Q' + (currentQ + 1) + ' / ' + totalQ;
+    document.getElementById('progressPercent').textContent = pct + '%';
+    document.getElementById('progressFill').style.width = pct + '%';
+
+    var selected = (answers[currentQ] !== undefined) ? answers[currentQ] : -1;
+    var html = '';
+    html += '<div class="question-card">';
+    html += '<div class="q-number">QUESTION ' + ('0' + (currentQ + 1)).slice(-2) + '</div>';
+    html += '<div class="q-text">' + q.text + '</div>';
+    html += '<div class="options">';
+    for (var i = 0; i < q.options.length; i++) {
+      var cls = (selected === i) ? 'option selected' : 'option';
+      html += '<div class="' + cls + '" data-index="' + i + '">';
+      html += '<div class="option-marker">' + markers[i] + '</div>';
+      html += '<div>' + q.options[i].text + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+    html += '<div class="nav-buttons">';
+    if (currentQ > 0) {
+      html += '<button class="btn btn-back" id="backBtn">\u2190 \u623B\u308B</button>';
+    }
+    html += '</div>';
+    html += '</div>';
+
+    document.getElementById('quizArea').innerHTML = html;
+
+    var options = document.querySelectorAll('#quizArea .option');
+    for (var j = 0; j < options.length; j++) {
+      options[j].addEventListener('click', handleOptionClick);
+    }
+    var backBtn = document.getElementById('backBtn');
+    if (backBtn) {
+      backBtn.addEventListener('click', function() {
+        if (currentQ > 0) {
+          currentQ--;
+          renderQuestion();
+        }
+      });
+    }
+  }
+
+  function handleOptionClick(e) {
+    var el = e.currentTarget;
+    var index = parseInt(el.getAttribute('data-index'), 10);
+    answers[currentQ] = index;
+    if (currentQ < totalQ - 1) {
+      currentQ++;
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult() {
+    var scores = [0, 0, 0, 0];
+    for (var i = 0; i < answers.length; i++) {
+      var s = questions[i].options[answers[i]].scores;
+      scores[0] += s[0];
+      scores[1] += s[1];
+      scores[2] += s[2];
+      scores[3] += s[3];
+    }
+
+    var maxScore = Math.max.apply(null, scores);
+    var maxIdx = scores.indexOf(maxScore);
+    var result = results[typeKeys[maxIdx]];
+    var maxPossible = 21;
+
+    document.getElementById('progressWrap').classList.add('hidden');
+    document.getElementById('quizArea').classList.add('hidden');
+    document.getElementById('resultArea').classList.remove('hidden');
+
+    var html = '<div class="result-section">';
+    html += '<div class="result-type-card type-' + result.type + '">';
+    html += '<span class="result-icon">' + result.icon + '</span>';
+    html += '<div class="result-label">' + result.label + '</div>';
+    html += '<div class="result-title">' + result.title + '</div>';
+    html += '<div class="result-subtitle">' + result.subtitle + '</div>';
+
+    html += '<div class="score-bars">';
+    for (var i = 0; i < 4; i++) {
+      var p = Math.round((scores[i] / maxPossible) * 100);
+      html += '<div class="score-row">';
+      html += '<span class="score-label">' + typeNames[i] + '</span>';
+      html += '<div class="score-track">';
+      html += '<div class="score-fill ' + fillClasses[i] + '" id="scoreFill' + i + '"></div>';
+      html += '</div>';
+      html += '<span class="score-val">' + p + '%</span>';
+      html += '</div>';
+    }
+    html += '</div>';
+
+    html += '<div class="result-description">' + result.description + '</div>';
+    html += '</div>';
+
+    html += '<div class="advice-card">';
+    html += '<h3><span class="icon">💡</span>あなたへのアドバイス</h3>';
+    html += '<ul class="advice-list">';
+    for (var j = 0; j < result.advice.length; j++) {
+      html += '<li>' + result.advice[j] + '</li>';
+    }
+    html += '</ul>';
+    html += '</div>';
+
+    html += '<div class="reme-card">';
+    html += '<h3>RE:ME</h3>';
+    html += '<div class="tagline">CAREER COACHING FOR YOUR TRUE SELF</div>';
+    html += '<p>' + result.reme + '</p>';
+    html += '<div class="reme-features">';
+    html += '<div class="reme-feature"><span class="feat-icon">🎯</span>あなた専用のキャリア戦略設計</div>';
+    html += '<div class="reme-feature"><span class="feat-icon">🔍</span>隠れた強みの発掘セッション</div>';
+    html += '<div class="reme-feature"><span class="feat-icon">📋</span>具体的なアクションプラン作成</div>';
+    html += '<div class="reme-feature"><span class="feat-icon">🤝</span>伴走型の継続サポート</div>';
+    html += '</div>';
+    html += '<a class="btn-cta" href="#">まずは無料相談してみる</a>';
+    html += '</div>';
+
+    html += '<button class="btn-retry" id="retryBtn">もう一度診断する</button>';
+    html += '</div>';
+
+    document.getElementById('resultArea').innerHTML = html;
+
+    setTimeout(function() {
+      for (var k = 0; k < 4; k++) {
+        var el = document.getElementById('scoreFill' + k);
+        if (el) {
+          el.style.width = Math.round((scores[k] / maxPossible) * 100) + '%';
+        }
+      }
+    }, 100);
+
+    document.getElementById('retryBtn').addEventListener('click', function() {
+      document.getElementById('resultArea').classList.add('hidden');
+      document.getElementById('resultArea').innerHTML = '';
+      document.getElementById('heroSection').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+})();
+</script>
+</body>
+</html>
